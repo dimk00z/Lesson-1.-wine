@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from pandas import read_excel
 from collections import defaultdict, OrderedDict
 from http.server import HTTPServer, SimpleHTTPRequestHandler
@@ -31,7 +31,7 @@ def generate_html_template(template_file_name, drinks_file_name):
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html', 'xml']))
     template = env.get_template(template_file_name)
-    age_of_the_winery = datetime.datetime.now().year - \
+    age_of_the_winery = datetime.now().year - \
         YEAR_OF_CREATION_OF_THE_WINERY
     drink_types = load_drinks_from_excel_file(drinks_file_name)
     rendered_page = template.render(
