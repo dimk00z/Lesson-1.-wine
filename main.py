@@ -42,18 +42,18 @@ def generate_html_template(template_file_name, drinks_file_name):
     return rendered_page
 
 
-def read_links_from_args():
+def read_links_from_args(argument="wine_price_file", help="Enter file name"):
     args_parser = argparse.ArgumentParser(description='''This script can
     load wine price list from file,
     generate html page and start simple web server''')
-    args_parser.add_argument("wine_price_file", type=str,
-                             help="Enter file name")
-    return args_parser.parse_args().wine_price_file
+    args_parser.add_argument(argument, type=str,
+                             help=help)
+    return args_parser
 
 
 def main():
     template_file_name = 'template.html'
-    drinks_file_name = read_links_from_args()
+    drinks_file_name = read_links_from_args().parse_args().wine_price_file
     rendered_page = generate_html_template(
         template_file_name, drinks_file_name)
     drinks = load_drinks_from_excel_file(drinks_file_name)
